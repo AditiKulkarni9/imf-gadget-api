@@ -58,10 +58,9 @@ router.post('/:id/self-destruct', async (req, res) => {
       const gadget = await Gadget.findByPk(req.params.id);
       if (!gadget) return res.status(404).json({ error: 'Gadget not found' });
   
-      // Generate a random confirmation code (6-digit number)
+      
       const confirmationCode = Math.floor(100000 + Math.random() * 900000);
   
-      // Update gadget status to "Destroyed"
       await gadget.update({ status: 'Destroyed' });
   
       res.json({ message: 'Self-destruct sequence initiated', confirmationCode });
