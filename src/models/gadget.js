@@ -1,30 +1,42 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const { v4: uuidv4 } = require('uuid');
 
 const Gadget = sequelize.define('Gadget', {
-  id: {
-    type: DataTypes.UUID,
-    primaryKey: true,
-    defaultValue: uuidv4,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  codename: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false,
-  },
-  status: {
-    type: DataTypes.ENUM('Available', 'Deployed', 'Destroyed', 'Decommissioned'),
-    defaultValue: 'Available',
-  },
-  decommissionedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
+    id: {
+        type: DataTypes.UUID,
+        defaultValue: Sequelize.literal('gen_random_uuid()'),
+        primaryKey: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    codename: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    status: {
+        type: DataTypes.ENUM('Available', 'Destroyed'),
+        defaultValue: 'Available'
+    },
+    decommissionedAt: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('NOW()')
+    },
+    updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('NOW()')
+    }
+}, {
+    tableName: 'gadgets',
+    timestamps: true
 });
 
 module.exports = Gadget;
