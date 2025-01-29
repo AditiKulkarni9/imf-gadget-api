@@ -4,7 +4,7 @@ const Gadget = require('../models/gadget');
 const router = express.Router();
 
 // GET all gadgets
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const gadgets = await Gadget.findAll();
     if (!gadgets) return res.status(404).json({ error: 'Gadget not found' });
