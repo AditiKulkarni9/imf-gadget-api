@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const gadgets = await Gadget.findAll({
-        attributes: ['id', 'name', 'codename', 'status', 'decommissionedAt', 'createdAt', 'updatedAt'] // Ensure brand is fetched
+        attributes: ['id', 'name', 'codename', 'status', 'decommissionedAt', 'createdat', 'updatedat'] // Ensure brand is fetched
     });
     if (!gadgets) return res.status(404).json({ error: 'Gadget not found' });
     res.json(gadgets);
