@@ -33,7 +33,7 @@ GET /gadgets
 🔹 Retrieves all gadgets with a **random mission success probability**.  
 ✅ **Supports filtering by status**:  
 ```http
-GET /gadgets?status=Destroyed
+GET /gadgets?status=Available
 ```
 
 #### 📌 **Response Example**
