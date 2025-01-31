@@ -17,7 +17,7 @@ const Gadget = sequelize.define('Gadget', {
         unique: true
     },
     status: {
-        type: DataTypes.ENUM('Available', 'Destroyed','Decomissioned'),
+        type: DataTypes.ENUM('Available', 'Destroyed','Decommissioned'),
         defaultValue: 'Available'
     },
     decommissionedAt: {
