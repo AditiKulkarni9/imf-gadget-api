@@ -3,14 +3,23 @@ const { v4: uuidv4 } = require('uuid');
 const Gadget = require('../models/gadget');
 const router = express.Router();
 
+//func for generating random success probability
+const generateMissionSuccessProbability = () => {
+  return Math.floor(Math.random() * 51) + 50; 
+};
+
 // GET all gadgets
 router.get('/', async (req, res) => {
   try {
     const gadgets = await Gadget.findAll({
-        attributes: ['id', 'name', 'codename', 'status', 'decommissionedAt', 'createdAt', 'updatedAt'] // Ensure brand is fetched
+        attributes: ['id', 'name', 'codename', 'status', 'decommissionedAt', 'createdAt', 'updatedAt'] 
     });
     if (!gadgets) return res.status(404).json({ error: 'Gadget not found' });
-    res.json(gadgets);
+    const modifiedGadgets = gadgets.map(gadget => ({
+      ...gadget.toJSON(),
+      missionSuccessProbability: `${generateMissionSuccessProbability()}% success probability`
+  }));
+    res.json(modifiedGadgets);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
