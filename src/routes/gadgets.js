@@ -18,10 +18,11 @@ router.get('/', async (req, res) => {
             whereClause.status = status; // Apply filter if status 
         }
     const gadgets = await Gadget.findAll({
+        where: whereClause,
         attributes: ['id', 'name', 'codename', 'status', 'decommissionedAt', 'createdAt', 'updatedAt'] 
     });
     if (!gadgets) return res.status(404).json({ error: 'Gadget not found' });
-    
+
     const modifiedGadgets = gadgets.map(gadget => ({
       ...gadget.toJSON(),
       missionSuccessProbability: `${generateMissionSuccessProbability()}% success probability`
