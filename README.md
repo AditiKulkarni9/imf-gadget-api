@@ -164,7 +164,7 @@ npm run dev
 - **Backend:** Node.js, Express.js
 - **Database:** PostgreSQL, Sequelize ORM
 - **Hosting:** Render
-- **API Documentation:** Postman / Swagger
+- **API Documentation:** Postman
 
 ---
 
